@@ -1,4 +1,5 @@
-# CS 260 Notes
+# CS 260 Notes 
+hello world from vs code
 
 [My startup - Simon](https://simon.cs260.click)
 
