@@ -9,6 +9,7 @@ hello world from github
 - [Course instruction](https://github.com/webprogramming260)
 - [Canvas](https://byu.instructure.com)
 - [MDN](https://developer.mozilla.org)
+- [Markdown Cheat Sheat](markdown_cheat_sheet.md)
 
 ## AWS
 
