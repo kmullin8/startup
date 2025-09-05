@@ -1,5 +1,6 @@
 # CS 260 Notes 
 hello world from vs code
+hello world from github
 
 [My startup - Simon](https://simon.cs260.click)
 
