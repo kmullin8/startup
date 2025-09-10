@@ -1,17 +1,7 @@
-# Your startup name here
-hello world from vs code
-hello world from github
+# Trivia Challenge Leaderboard
 
-[My Notes](notes.md)
-
-A brief description of the application here. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
-
-> [!NOTE]
->  This is a template for your startup application. You must modify this `README.md` file for each phase of your development. You only need to fill in the section for each deliverable when that deliverable is submitted in Canvas. Without completing the section for a deliverable, the TA will not know what to look for when grading your submission. Feel free to add additional information to each deliverable description, but make sure you at least have the list of rubric items and a description of what you did for each item.
-
-> [!NOTE]
->  If you are not familiar with Markdown then you should review the [documentation](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax) before continuing.
+A fun web app where users compete in short trivia challenges, earn points, and climb a global leaderboard.  
+A brief description of the application here. 
 
 ## 🚀 Specification Deliverable
 
@@ -20,45 +10,86 @@ A brief description of the application here. Lorem ipsum dolor sit amet, consect
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] Proper use of Markdown
-- [ ] A concise and compelling elevator pitch
-- [ ] Description of key features
-- [ ] Description of how you will use each technology
+- [x] Proper use of Markdown
+- [x] A concise and compelling elevator pitch
+- [x] Description of key features
+- [x] Description of how you will use each technology
 - [ ] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
 
 ### Elevator pitch
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+---
+Tired of mindlessly scrolling? Put your knowledge to the test! **Trivia Challenge Leaderboard** is a fast-paced quiz game where you race against the clock to answer as many questions as possible. Each correct answer earns you points, and the more you get right, the higher you climb on the global leaderboard. With fresh trivia pulled from an external API and live leaderboard updates, you’ll always have new challenges waiting for you. Can you outscore your friends and claim the top spot?
 
 ### Design
+---
+#### Rough sketch of app layout
 
-![Design image](placeholder.png)
+- **Login/Register Page**: Users can create accounts or log in.  
+- **Game Page**: Timer counts down while trivia questions appear one by one. User selects answers and earns points.  
+- **Leaderboard Page**: Shows the global leaderboard, updating live whenever a player posts a new score.  
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
 ```mermaid
 sequenceDiagram
-    actor You
-    actor Website
-    You->>Website: Replace this with your design
+    actor User
+    participant Frontend
+    participant Backend
+    participant TriviaAPI
+    participant Database
+
+    User->>Frontend: Logs in
+    Frontend->>Backend: Authenticate user
+    Backend->>Database: Verify credentials
+    Database-->>Backend: Success
+    Backend-->>Frontend: User authenticated
+
+    User->>Frontend: Start trivia round
+    Frontend->>Backend: Request questions
+    Backend->>TriviaAPI: Fetch trivia questions
+    TriviaAPI-->>Backend: Return trivia questions
+    Backend-->>Frontend: Deliver questions with timer
+
+    User->>Frontend: Answers questions
+    Frontend->>Backend: Submit score
+    Backend->>Database: Save score
+    Backend-->>Frontend: Acknowledge
+
+    User->>Frontend: View leaderboard
+    Frontend->>Backend: Request leaderboard
+    Backend->>Database: Retrieve top scores
+    Database-->>Backend: Return leaderboard data
+    Backend-->>Frontend: Display leaderboard
+
 ```
 
 ### Key features
-
-- Describe your key feature
-- Describe your key feature
-- Describe your key feature
+---
+- User Accounts: Register, log in, and save your progress.
+- Trivia Gameplay: Timed rounds with points awarded for each correct answer.
+- Dynamic Questions: Pulls trivia questions from a public trivia API.
+- Global Leaderboard: Ranks players by score, stored in the database.
+- Live Updates: Leaderboard updates instantly via WebSocket.
+- Replayability: Always fresh trivia content with multiple categories and difficulties.
 
 ### Technologies
-
+---
 I am going to use the required technologies in the following ways.
 
-- **HTML** - Description here
-- **CSS** - Description here
-- **React** - Description here
-- **Service** - Description here
-- **DB/Login** - Description here
-- **WebSocket** - Description here
+-HTML – Structure the app with semantic elements like header, footer, navigation, forms (login), and main content areas (game + leaderboard).
+
+-CSS – Style the app with a modern look: responsive layout, colors, animations for timer countdown, and hover effects on answer buttons.
+
+-React – Build the app using React components. Use routing for navigation (Login, Game, Leaderboard pages). Use React hooks for timer countdowns, game state, and user interactivity.
+
+-Service (Node.js/Express) – Provide backend endpoints for:
+    -Register/login/logout
+    -Start trivia round (fetch questions from API)
+    -Submit score
+    -Get leaderboard rankings
+
+-DB/Login (MongoDB) – Store user accounts (securely hashed passwords) and game scores. Use queries to generate leaderboard rankings.
+
+-WebSocket – Broadcast leaderboard updates to all connected clients when a new score is submitted. Keeps the experience interactive and exciting.
 
 ## 🚀 AWS deliverable
 
