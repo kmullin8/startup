@@ -26,8 +26,11 @@ Tired of mindlessly scrolling? Put your knowledge to the test! **Trivia Challeng
 
 - **Login/Register Page**: Users can create accounts or log in.  
 - **Game Page**: Timer counts down while trivia questions appear one by one. User selects answers and earns points.  
-- **Leaderboard Page**: Shows the global leaderboard, updating live whenever a player posts a new score.  
+- **Leaderboard Page**: Shows the global leaderboard, updating live whenever a player posts a new score.
 
+![Login Page](login%20page.png)
+![question Page](question%20page.png)
+![leaderboard Page](learder%20board.png)
 
 ```mermaid
 sequenceDiagram
