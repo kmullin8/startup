@@ -16,7 +16,7 @@ hello world from github
 My IP address is: 54.81.96.130
 Launching my AMI I initially put it on a private subnet. Even though it had a public IP address and the security group was right, I wasn't able to connect to it.
 
-ssh to server: ```ssh -i key\ 1.pem ubuntu@54.234.107.25```
+ssh to server: ```ssh -i key\ 1.pem ubuntu@kadenmullin.click```
 
 ## Caddy
 
