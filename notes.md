@@ -24,9 +24,175 @@ No problems worked just like it said in the [instruction](https://github.com/web
 
 ## HTML
 
-This was easy. I was careful to use the correct structural elements such as header, footer, main, nav, and form. The links between the three views work great using the `a` element.
+### Elements & Tags
+- Elements are represented by **tags**: `<p>Hello</p>`.
+- Tags use `< >`. Closing tags use `/`: `</p>`.
+- Some tags enclose text or other elements.
 
-The part I didn't like was the duplication of the header and footer code. This is messy, but it will get cleaned up when I get to React.
+Basic page structure:
+```html
+<html>
+  <head>
+    <title>My First Page</title>
+  </head>
+  <body>
+    <main>
+      <p>Hello world</p>
+    </main>
+  </body>
+</html>
+```
+### Attributes Provide extra info about elements.
+
+- id → unique identifier.
+
+- class → groups elements.
+
+Written inside the opening tag:
+
+```html
+<p id="hello" class="greeting">Hello world</p>
+```
+
+### Hyperlinks
+- Created with the <a> element + href attribute:
+
+```html
+<a href="https://byu.edu">Go to the Y</a>
+```
+
+### Full Example
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <main>
+      <h1>Hello world</h1>
+      <p class="introduction">
+        HTML welcomes you to the amazing world of
+        <span class="topic">web programming</span>.
+      </p>
+      <p class="question">What will this mean to you?</p>
+      <p class="assignment">Learn more <a href="instruction.html">here</a>.</p>
+    </main>
+  </body>
+</html>
+```
+
+- <!DOCTYPE html> tells browser the document type.
+
+- Styling comes from CSS, not HTML.
+
+### Common Elements
+
+| Element     | Meaning                            |
+| ----------- | ---------------------------------- |
+| `html`      | Page container                     |
+| `head`      | Metadata container                 |
+| `title`     | Page title                         |
+| `meta`      | Metadata (charset, viewport, etc.) |
+| `script`    | JavaScript                         |
+| `link`      | External reference (CSS, etc.)     |
+| `body`      | Page content                       |
+| `header`    | Header section                     |
+| `footer`    | Footer section                     |
+| `nav`       | Navigation                         |
+| `main`      | Main content                       |
+| `section`   | Section of content                 |
+| `aside`     | Sidebar content                    |
+| `div`       | Block container                    |
+| `span`      | Inline container                   |
+| `h1`–`h9`   | Headings                           |
+| `p`         | Paragraph                          |
+| `b`         | Bold / emphasis                    |
+| `table`     | Table                              |
+| `tr`        | Table row                          |
+| `th`        | Table header cell                  |
+| `td`        | Table data cell                    |
+| `ol` / `ul` | Ordered / unordered list           |
+| `li`        | List item                          |
+| `a`         | Link (anchor)                      |
+| `img`       | Image                              |
+| `dialog`    | Interactive dialog box             |
+| `input`     | User input field                   |
+| `audio`     | Audio content                      |
+| `video`     | Video content                      |
+| `svg`       | Vector graphics                    |
+| `iframe`    | Inline frame                       |
+
+
+
+### Comments
+Use `<!-- ... -->`
+
+```html
+<!-- This is a comment -->
+```
+
+
+Special Characters
+Reserved characters must be escaped:
+
+| Character | Entity      |
+| --------- | ----------- |
+| &amp;     | `&amp;`     |
+| <         | `&lt;`      |
+| >         | `&gt;`      |
+| "         | `&quot;`    |
+| '         | `&apos;`    |
+| &#128512; | `&#128512;` |
+
+
+
+### Structure Example
+
+```html
+<body>
+  <p>Body</p>
+  <header>
+    <p>Header - <span>Span</span></p>
+    <nav>
+      Navigation
+      <div>Div</div>
+      <div>Div</div>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <p>Section</p>
+      <ul>
+        <li>List</li>
+        <li>List</li>
+        <li>List</li>
+      </ul>
+    </section>
+    <section>
+      <p>Section</p>
+      <table>
+        <tr>
+          <th>Table</th>
+          <th>Table</th>
+          <th>Table</th>
+        </tr>
+        <tr>
+          <td>table</td>
+          <td>table</td>
+          <td>table</td>
+        </tr>
+      </table>
+    </section>
+    <aside>
+      <p>Aside</p>
+    </aside>
+  </main>
+
+  <footer>
+    <div>Footer - <span>Span</span></div>
+  </footer>
+</body>
+```
 
 ## CSS
 
