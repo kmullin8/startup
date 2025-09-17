@@ -54,11 +54,17 @@ Written inside the opening tag:
 <p id="hello" class="greeting">Hello world</p>
 ```
 
-### Hyperlinks
+### links
 - Created with the <a> element + href attribute:
 
 ```html
 <a href="https://byu.edu">Go to the Y</a>
+```
+
+### Images
+
+```html
+<img src="image.jpg" alt="Description of image" width="300" height="200">
 ```
 
 ### Full Example
