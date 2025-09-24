@@ -30,21 +30,22 @@
     </header>
 
     <main>
-        <div class="players">
-            Player:
-            <span class="player-name">player username</span>
-        </div>
-        
-        <div>
-            <label for="count">Score</label>
-            <input type="text" id="count" value="--" readonly />
-        </div>
+        <div class="status-bar" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1em;">
+  
+            <div class="players">
+                Player:
+                <span class="player-name">player username</span>
+            </div>
 
-        <!-- Question header -->
-        <div class="question-header" style="display:flex; align-items:center;">
-            <div class="timer" style="margin-left:auto;">
+            <div class="score">
+                <label for="count">Score</label>
+                <input type="text" id="count" value="--" readonly />
+            </div>
+
+            <div class="timer">
                 <span>time remaining: 0:00</span>
             </div>
+
         </div>
 
 
