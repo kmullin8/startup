@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 32">
-  <!-- White case -->
-  <rect x="2" y="6" width="60" height="20" fill="#f0f0f0" stroke="#000" stroke-width="2"/>
-  <!-- Time text in Windows 95 style font -->
-  <text x="32" y="22" text-anchor="middle" font-family="Tahoma, Verdana, sans-serif" font-size="14" fill="#000000">
-    12:00
-  </text>
-</svg>
