@@ -60,58 +60,8 @@ nav menu li a:hover {
 }
 
 /* ============================
-   Main Section
+   Form Inputs
    ============================ */
-main {
-  flex: 1;                   
-  display: flex;
-  flex-direction: column;
-  align-items: center;        
-  justify-content: flex-start; 
-  padding: 2em;
-  text-align: center;
-  background-color: #008080;
-}
-
-main h1 {
-  margin-bottom: 2em;
-  font-size: 2em;
-  font-weight: bold;
-  background-color: #C0C0C0;        /* light gray Win95 box */
-  color: black;
-  padding: 0.4em 1em;
-  display: inline-block;
-
-  /* Beveled 3D effect */
-  border-top: 2px solid #fff;
-  border-left: 2px solid #fff;
-  border-bottom: 2px solid #808080;
-  border-right: 2px solid #808080;
-
-  /* Drop shadow */
-  box-shadow: 4px 4px 0px black;
-}
-
-/* Raise the form slightly */
-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start; 
-  flex: 1;                       
-  margin-top: 1em;               
-}
-
-/* ============================
-   Form Styling
-   ============================ */
-form div {
-  margin: 0.5em 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 input {
   border: 2px inset #fff;
   padding: 0.3em;
@@ -121,10 +71,12 @@ input {
   font-family: inherit;
 }
 
-/* Button Row */
+/* ============================
+   Button Row
+   ============================ */
 .button-row {
   display: flex;
-  gap: 1em;         /* space between buttons */
+  gap: 1em;
   margin-top: 1em;
 }
 
@@ -164,7 +116,6 @@ footer {
   font-size: 0.9em;
 }
 
-
 /* ============================
    Icon Styling (Win95 look)
    ============================ */
@@ -174,13 +125,9 @@ form img {
   border-bottom: 2px solid #808080;
   border-right: 2px solid #808080;
   background-color: #C0C0C0;
-  padding: 0.2em;              /* space around the icon */
+  padding: 0.2em;
   margin-right: 0.3em;
 
   /* Drop shadow */
   box-shadow: 2px 2px 0px black;
 }
-
-
-
-
