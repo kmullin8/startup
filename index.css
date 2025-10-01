@@ -1,11 +1,4 @@
-/* ============================
-   Index Page Specific Styles
-   ============================ */
-
-/* Teal Win95 desktop background */
-
-
-/* Fancy title bar style for login page */
+/*title bar style*/
 main h1 {
   margin-bottom: 2em;
   font-size: 2em;

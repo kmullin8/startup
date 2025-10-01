@@ -1,0 +1,89 @@
+/* Status bar (top of main) */
+.status-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #C0C0C0;
+  padding: 0.5em 1em;
+  margin-bottom: 1.5em;
+
+  /* Win95 raised look */
+  border-top: 2px solid #fff;
+  border-left: 2px solid #fff;
+  border-bottom: 2px solid #808080;
+  border-right: 2px solid #808080;
+
+  box-shadow: 2px 2px 0px black;
+  font-size: 0.9em;
+}
+
+/* Player info */
+.players {
+  font-weight: bold;
+}
+
+.player-name {
+  color: #000080; /* navy highlight for username */
+  margin-left: 0.25em;
+}
+
+/* Score box */
+.score {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.score input {
+  width: 4em;
+  text-align: center;
+  font-weight: bold;
+  color: red;
+
+  /* make the input look Win95 style inset */
+  border: 2px inset #fff;
+  background-color: #fff;
+}
+
+/* Timer */
+.timer {
+    font-size: 1.1em;
+    font-family: monospace;
+    font-weight: bold;
+    color: #000;
+}
+
+/* Question text */
+.question-text {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin: 1.5em 0;
+  padding: 0.5em 1em;
+  background-color: #C0C0C0;
+
+  /* raised panel look */
+  border-top: 2px solid #fff;
+  border-left: 2px solid #fff;
+  border-bottom: 2px solid #808080;
+  border-right: 2px solid #808080;
+
+  box-shadow: 2px 2px 0px black;
+  display: inline-block;
+}
+
+/* Answer buttons */
+.answers button {
+  width: 100%;
+  padding: 1em;
+  font-size: 1em;
+  font-weight: bold;
+}
+
+.answers button:hover {
+  background-color: #000080;
+  color: white;
+}
+
+.answers button:active {
+  border: 2px inset #fff;
+}
