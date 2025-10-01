@@ -1,0 +1,58 @@
+/* Table container */
+main {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 4em;
+}
+
+/* Base table style */
+table {
+  border-collapse: collapse;
+  min-width: 500px;
+  font-size: 0.95em;
+
+  border-top: 4px solid #fff;
+  border-left: 4px solid #fff;
+  border-bottom: 4px solid #808080;
+  border-right: 4px solid #808080;
+
+  box-shadow: 4px 4px 0px black;
+}
+
+/* Header row */
+thead th {
+  padding: 0.5em 1em;
+  text-align: left;
+  background-color: #C0C0C0;
+
+  /* Win95 raised look */
+  border-top: 2px solid #fff;
+  border-left: 2px solid #fff;
+  border-bottom: 2px solid #808080;
+  border-right: 2px solid #808080;
+
+  font-weight: bold;
+}
+
+/* Table body cells */
+tbody td {
+  padding: 0.4em 1em;
+  border: 1px solid #808080;
+}
+
+/* Alternating row colors (striped effect) */
+tbody tr:nth-child(even) {
+  background-color: #E0E0E0;
+}
+
+tbody tr:nth-child(odd) {
+  background-color: #C0C0C0;
+}
+
+/* Hover effect for rows */
+tbody tr:hover {
+  background-color: #000080;
+  color: white;
+  cursor: default;
+}
