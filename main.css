@@ -112,6 +112,11 @@ button:active {
   border: 2px inset #fff;
 }
 
+button:hover{
+  background-color: #000080;
+  color: white;
+}
+
 /* ============================
    Footer
    ============================ */
