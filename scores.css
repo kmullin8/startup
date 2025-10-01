@@ -9,7 +9,7 @@ main {
 /* Base table style */
 table {
   border-collapse: collapse;
-  min-width: 500px;
+  min-width: 400px;
   font-size: 0.95em;
 
   border-top: 4px solid #fff;
