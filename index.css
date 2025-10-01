@@ -3,15 +3,7 @@
    ============================ */
 
 /* Teal Win95 desktop background */
-main {
-  flex: 1;                   
-  display: flex;
-  flex-direction: column;
-  align-items: center;        
-  justify-content: flex-start; 
-  padding: 2em;
-  text-align: center;
-}
+
 
 /* Fancy title bar style for login page */
 main h1 {
