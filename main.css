@@ -10,7 +10,7 @@ body {
   display: flex;
   flex-direction: column;
   min-width: 375px;
-  background-color: #C0C0C0;
+  background-color: #008080;
   font-family: "MS Sans Serif", Tahoma, sans-serif;
   color: rgb(0, 0, 0);
 }
