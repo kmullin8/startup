@@ -32,7 +32,7 @@ form {
   align-items: center;
   justify-content: flex-start;
   flex: 1;
-  margin-top: 1em;
+  margin-top: 2em;
 }
 
 form div {
@@ -41,3 +41,18 @@ form div {
   align-items: center;
   justify-content: center;
 }
+
+/*icon styling*/
+form img {
+  border-top: 2px solid #fff;
+  border-left: 2px solid #fff;
+  border-bottom: 2px solid #808080;
+  border-right: 2px solid #808080;
+  background-color: #C0C0C0;
+  padding: 0.2em;
+  margin-right: 0.3em;
+
+  /* Drop shadow */
+  box-shadow: 2px 2px 0px black;
+}
+
