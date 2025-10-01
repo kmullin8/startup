@@ -14,7 +14,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 - [x] A concise and compelling elevator pitch
 - [x] Description of key features
 - [x] Description of how you will use each technology
-- [ ] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
+- [x] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
 
 ### Elevator pitch
 ---
@@ -98,21 +98,21 @@ I am going to use the required technologies in the following ways.
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Server deployed and accessible with custom domain name** - [My server link](https://yourdomainnamehere.click).
+- [x] **Server deployed and accessible with custom domain name** - [My server link](https://startup.kadenmullin.click).
 
 ## 🚀 HTML deliverable
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **HTML pages** - I did not complete this part of the deliverable.
-- [ ] **Proper HTML element usage** - I did not complete this part of the deliverable.
-- [ ] **Links** - I did not complete this part of the deliverable.
-- [ ] **Text** - I did not complete this part of the deliverable.
-- [ ] **3rd party API placeholder** - I did not complete this part of the deliverable.
-- [ ] **Images** - I did not complete this part of the deliverable.
-- [ ] **Login placeholder** - I did not complete this part of the deliverable.
-- [ ] **DB data placeholder** - I did not complete this part of the deliverable.
-- [ ] **WebSocket placeholder** - I did not complete this part of the deliverable.
+- [x] **HTML pages** – `index.html`, `play.html`, `scores.html`  
+- [x] **Proper HTML element usage** – `<header>`, `<main>`, `<footer>`, `<nav>`, `<menu>`, `<form>` across all pages
+- [x] **Links** – Navigation links in `<menu>` and github link in `<footer>` on all pages
+- [x] **Text** – Placeholder text on all pages  
+- [x] **3rd party API placeholder** – Question text and answer buttons in `play.html`  
+- [x] **Images** – Icons in `index.html`  
+- [x] **Login placeholder** – Form with email/password in `index.html`  
+- [x] **DB data placeholder** – Hard-coded leaderboard table in `scores.html`  
+- [x] **WebSocket placeholder** –   Question text and answer buttons in `play.html` and leaderboard table in `scores.html`  
 
 ## 🚀 CSS deliverable
 
