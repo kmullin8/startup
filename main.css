@@ -1,0 +1,186 @@
+/* ============================
+   Windows 95 Global Layout
+   ============================ */
+html, body {
+  height: 100%;              
+  margin: 0;                 
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-width: 375px;
+  background-color: #C0C0C0;
+  font-family: "MS Sans Serif", Tahoma, sans-serif;
+  color: rgb(0, 0, 0);
+}
+
+/* ============================
+   Header
+   ============================ */
+header {
+  background-color: #C0C0C0;
+  border-bottom: 2px solid #808080;
+  padding: 0.5em;
+}
+
+header h1 {
+  font-size: 1.5em;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+
+/* ============================
+   Navigation
+   ============================ */
+nav menu {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0.5em 0 0;
+}
+
+nav menu li {
+  margin-right: 1em;
+}
+
+nav menu li a {
+  text-decoration: none;
+  color: black;
+  padding: 0.2em 0.5em;
+  border: 2px outset #fff;
+  background-color: #C0C0C0;
+}
+
+nav menu li a:hover {
+  background-color: #000080;
+  color: white;
+}
+
+/* ============================
+   Main Section
+   ============================ */
+main {
+  flex: 1;                   
+  display: flex;
+  flex-direction: column;
+  align-items: center;        
+  justify-content: flex-start; 
+  padding: 2em;
+  text-align: center;
+  background-color: #008080;
+}
+
+main h1 {
+  margin-bottom: 2em;
+  font-size: 2em;
+  font-weight: bold;
+  background-color: #C0C0C0;        /* light gray Win95 box */
+  color: black;
+  padding: 0.4em 1em;
+  display: inline-block;
+
+  /* Beveled 3D effect */
+  border-top: 2px solid #fff;
+  border-left: 2px solid #fff;
+  border-bottom: 2px solid #808080;
+  border-right: 2px solid #808080;
+
+  /* Drop shadow */
+  box-shadow: 4px 4px 0px black;
+}
+
+/* Raise the form slightly */
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; 
+  flex: 1;                       
+  margin-top: 1em;               
+}
+
+/* ============================
+   Form Styling
+   ============================ */
+form div {
+  margin: 0.5em 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+input {
+  border: 2px inset #fff;
+  padding: 0.3em;
+  margin-left: 0.3em;
+  background-color: white;
+  color: black;
+  font-family: inherit;
+}
+
+/* Button Row */
+.button-row {
+  display: flex;
+  gap: 1em;         /* space between buttons */
+  margin-top: 1em;
+}
+
+.button-row button:hover {
+  background-color: #000080;
+  color: white;
+}
+
+/* ============================
+   Buttons
+   ============================ */
+button {
+  border-top: 2px solid #fff;
+  border-left: 2px solid #fff;
+  border-bottom: 2px solid #808080;
+  border-right: 2px solid #808080;
+  background-color: #C0C0C0;
+  padding: 0.4em 1em;
+  font-family: inherit;
+  cursor: pointer;
+
+  /* Drop shadow */
+  box-shadow: 2px 2px 0px black;
+}
+
+button:active {
+  border: 2px inset #fff;
+}
+
+/* ============================
+   Footer
+   ============================ */
+footer {
+  border-top: 2px solid #808080;
+  padding: 0.5em;
+  background-color: #C0C0C0;
+  font-size: 0.9em;
+}
+
+
+/* ============================
+   Icon Styling (Win95 look)
+   ============================ */
+form img {
+  border-top: 2px solid #fff;
+  border-left: 2px solid #fff;
+  border-bottom: 2px solid #808080;
+  border-right: 2px solid #808080;
+  background-color: #C0C0C0;
+  padding: 0.2em;              /* space around the icon */
+  margin-right: 0.3em;
+
+  /* Drop shadow */
+  box-shadow: 2px 2px 0px black;
+}
+
+
+
+
