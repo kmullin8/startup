@@ -49,9 +49,10 @@ nav menu li {
 nav menu li a {
   text-decoration: none;
   color: black;
-  padding: 0.2em 0.5em;
+  padding: 0.1em 0.5em;
   border: 2px outset #fff;
   background-color: #C0C0C0;
+  box-shadow: 2px 2px 0px black;
 }
 
 nav menu li a:hover {
@@ -69,7 +70,7 @@ input {
   font-family: inherit;
 }
 
-/*Button Row*/
+/*Button Row formating*/
 .button-row {
   display: flex;
   gap: 1em;
@@ -81,7 +82,7 @@ input {
   color: white;
 }
 
-/*Buttons*/
+/*Button styling*/
 button {
   border-top: 2px solid #fff;
   border-left: 2px solid #fff;
