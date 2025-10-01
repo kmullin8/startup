@@ -118,12 +118,12 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Header, footer, and main content body** - I did not complete this part of the deliverable.
-- [ ] **Navigation elements** - I did not complete this part of the deliverable.
-- [ ] **Responsive to window resizing** - I did not complete this part of the deliverable.
-- [ ] **Application elements** - I did not complete this part of the deliverable.
-- [ ] **Application text content** - I did not complete this part of the deliverable.
-- [ ] **Application images** - I did not complete this part of the deliverable.
+- [x] **Header, footer, and main content body** – Win95 style layout with beveled header, fixed footer, and padded main content  
+- [x] **Navigation elements** – Win95 raised buttons with hover effects in the nav menu  
+- [x] **Responsive to window resizing** – Flex and grid layouts scale content and answers with window size  
+- [x] **Application elements** – Login form `index.css`, status bar and answers `play.css`, high scores table `scores.css`
+- [x] **Application text content** – Win95 fonts and bold/monospace styling for score, timer, and headings  
+- [x] **Application images** – Favicon and login icons styled with Win95 borders and shadows `index.css`
 
 ## 🚀 React part 1: Routing deliverable
 
