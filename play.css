@@ -62,12 +62,12 @@
   background-color: #C0C0C0;
 
   /* raised panel look */
-  border-top: 2px solid #fff;
-  border-left: 2px solid #fff;
-  border-bottom: 2px solid #808080;
-  border-right: 2px solid #808080;
+  border-top: 4px solid #fff;
+  border-left: 4px solid #fff;
+  border-bottom: 4px solid #808080;
+  border-right: 4px solid #808080;
 
-  box-shadow: 2px 2px 0px black;
+  box-shadow: 4px 4px 0px black;
   display: inline-block;
 }
 
@@ -77,6 +77,14 @@
   padding: 1em;
   font-size: 1em;
   font-weight: bold;
+
+  /* raised panel look */
+  border-top: 4px solid #fff;
+  border-left: 4px solid #fff;
+  border-bottom: 4px solid #808080;
+  border-right: 4px solid #808080;
+
+  box-shadow: 4px 4px 0px black;
 }
 
 .answers button:hover {
