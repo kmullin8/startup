@@ -104,15 +104,15 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [x] **HTML pages** - completed this part of the deliverable.
-- [x] **Proper HTML element usage** - completed this part of the deliverable.
-- [x] **Links** - completed this part of the deliverable.
-- [x] **Text** - completed this part of the deliverable.
-- [x] **3rd party API placeholder** - completed this part of the deliverable.
-- [x] **Images** - completed this part of the deliverable.
-- [x] **Login placeholder** - completed this part of the deliverable.
-- [x] **DB data placeholder** - completed this part of the deliverable.
-- [x] **WebSocket placeholder** - completed this part of the deliverable.
+- [x] **HTML pages** – `index.html`, `play.html`, `scores.html`  
+- [x] **Proper HTML element usage** – `<header>`, `<main>`, `<footer>`, `<nav>`, `<menu>`, `<form>` across all pages
+- [x] **Links** – Navigation links in `<menu>` and github link in `<footer>` on all pages
+- [x] **Text** – Placeholder text on all pages  
+- [x] **3rd party API placeholder** – Question text and answer buttons in `play.html`  
+- [x] **Images** – Icons in `index.html`  
+- [x] **Login placeholder** – Form with email/password in `index.html`  
+- [x] **DB data placeholder** – Hard-coded leaderboard table in `scores.html`  
+- [x] **WebSocket placeholder** –   Question text and answer buttons in `play.html` and leaderboard table in `scores.html`  
 
 ## 🚀 CSS deliverable
 
