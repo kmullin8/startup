@@ -1,10 +1,10 @@
 /*Windows 95 Global Layout*/
-html, body {
+html, .body {
   height: 100%;              
   margin: 0;                 
 }
 
-body {
+.body {
   display: flex;
   flex-direction: column;
   min-width: 375px;
