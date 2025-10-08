@@ -40,7 +40,6 @@ export default function App() {
                 </li>
             </menu>
           </nav>
-          <hr/>
         </header>
 
         <Routes>
