@@ -44,9 +44,6 @@ nav menu {
 
 nav menu li {
   margin-right: 1em;
-}
-
-nav menu li a {
   text-decoration: none;
   color: black;
   padding: 0.1em 0.5em;
@@ -55,7 +52,7 @@ nav menu li a {
   box-shadow: 2px 2px 0px black;
 }
 
-nav menu li a:hover {
+nav menu li:hover {
   background-color: #000080;
   color: white;
 }
