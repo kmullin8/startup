@@ -48,6 +48,14 @@ export function Play({ user }) {
     return `${m}:${s.toString().padStart(2, '0')}`;
   }
 
+  function resetGame() {
+    setScore(0);
+    setTimeRemaining(30);
+    setButtonColors([null, null, null, null]);
+    setDisabledButtons([false, false, false, false]);
+    localStorage.removeItem('score');
+  }
+
   return (
     <main>
       <div
@@ -118,6 +126,15 @@ export function Play({ user }) {
           </button>
         ))}
       </div>
+
+      {/* Only show Play Again button when time runs out */}
+      {timeRemaining === 0 && (
+        <div className="play-again-container">
+          <button type="button" className="play-again-button" onClick={resetGame}>
+            Play Again
+          </button>
+        </div>
+      )}
     </main>
   );
 }

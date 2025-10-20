@@ -96,3 +96,37 @@
 .answers button:active {
   border: 2px inset #fff;
 }
+
+/* Play Again button */
+.play-again-container {
+  text-align: center;
+  margin-top: 1.5em;
+}
+
+.play-again-button {
+  padding: 1em 2em;
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #c0c0c0;
+  color: black;
+
+  /* same Win95 raised panel style */
+  border-top: 4px solid #fff;
+  border-left: 4px solid #fff;
+  border-bottom: 4px solid #808080;
+  border-right: 4px solid #808080;
+
+  box-shadow: 4px 4px 0px black;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+/* Hover & active effects same as answer buttons */
+.play-again-button:hover {
+  background-color: #000080;
+  color: white;
+}
+
+.play-again-button:active {
+  border: 2px inset #fff;
+}
