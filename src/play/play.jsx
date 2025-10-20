@@ -2,6 +2,17 @@ import React from 'react';
 import './play.css';
 
 export function Play({ user }) {
+  const [score, setScore] = React.useState(0);
+
+  function handleAnswerClick() {
+    const isCorrect = Math.random() < 0.25;
+
+    if (isCorrect) {
+      setScore(score + 25);
+      localStorage.setItem('score', score + 25);
+    }
+  }
+
   return (
     <main>
       <div
@@ -21,7 +32,7 @@ export function Play({ user }) {
 
         <div className="score">
           <label htmlFor="count">Score</label>
-          <input type="text" id="count" defaultValue="--" readOnly />
+          <input type="text" id="count" value={score === 0 ? '--' : score} readOnly />
         </div>
 
         <div className="timer">
@@ -51,10 +62,10 @@ export function Play({ user }) {
           margin: '2em auto',
         }}
       >
-        <button type="submit">Answer A</button>
-        <button type="submit">Answer B</button>
-        <button type="submit">Answer C</button>
-        <button type="submit">Answer D</button>
+        <button type="button" onClick={handleAnswerClick}>Answer A</button>
+        <button type="button" onClick={handleAnswerClick}>Answer B</button>
+        <button type="button" onClick={handleAnswerClick}>Answer C</button>
+        <button type="button" onClick={handleAnswerClick}>Answer D</button>
       </div>
     </main>
   );
