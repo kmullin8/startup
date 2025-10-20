@@ -23,7 +23,8 @@
 }
 
 .player-name {
-  color: #000080; /* navy highlight for username */
+  color: #000080;
+  /* navy highlight for username */
   margin-left: 0.25em;
 }
 
@@ -47,10 +48,10 @@
 
 /* Timer */
 .timer {
-    font-size: 1.1em;
-    font-family: monospace;
-    font-weight: bold;
-    color: #000;
+  font-size: 1.1em;
+  font-family: monospace;
+  font-weight: bold;
+  color: #000;
 }
 
 /* Question text */

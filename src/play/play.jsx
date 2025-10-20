@@ -3,14 +3,34 @@ import './play.css';
 
 export function Play({ user }) {
   const [score, setScore] = React.useState(0);
+  const [buttonColors, setButtonColors] = React.useState([null, null, null, null]);
+  const [disabledButtons, setDisabledButtons] = React.useState([false, false, false, false]);
 
-  function handleAnswerClick() {
+  function handleAnswerClick(index) {
     const isCorrect = Math.random() < 0.25;
 
+    // Update score if correct
     if (isCorrect) {
-      setScore(score + 25);
-      localStorage.setItem('score', score + 25);
+      const newScore = score + 25;
+      setScore(newScore);
+      localStorage.setItem('score', newScore);
     }
+
+    // Update color and disable clicked button
+    const newColors = [...buttonColors];
+    const newDisabled = [...disabledButtons];
+    newColors[index] = isCorrect ? 'green' : 'red';
+    newDisabled[index] = true;
+    setButtonColors(newColors);
+    setDisabledButtons(newDisabled);
+
+    // Reset after .9 second
+    setTimeout(() => {
+      const resetColors = [null, null, null, null];
+      const resetDisabled = [false, false, false, false];
+      setButtonColors(resetColors);
+      setDisabledButtons(resetDisabled);
+    }, 900);
   }
 
   return (
@@ -32,7 +52,12 @@ export function Play({ user }) {
 
         <div className="score">
           <label htmlFor="count">Score</label>
-          <input type="text" id="count" value={score === 0 ? '--' : score} readOnly />
+          <input
+            type="text"
+            id="count"
+            value={score === 0 ? '--' : score}
+            readOnly
+          />
         </div>
 
         <div className="timer">
@@ -40,16 +65,11 @@ export function Play({ user }) {
         </div>
       </div>
 
-      {/* Question text */}
-      <p
-        className="question-text"
-        style={{ textAlign: 'center', maxWidth: '900px' }}
-      >
+      <p className="question-text" style={{ textAlign: 'center', maxWidth: '900px' }}>
         txt for the question txt for the question txt for the question txt for the question txt
         for the question txt for the question txt for the question txt for the question
       </p>
 
-      {/* Answer choices */}
       <div
         className="answers"
         style={{
@@ -62,10 +82,23 @@ export function Play({ user }) {
           margin: '2em auto',
         }}
       >
-        <button type="button" onClick={handleAnswerClick}>Answer A</button>
-        <button type="button" onClick={handleAnswerClick}>Answer B</button>
-        <button type="button" onClick={handleAnswerClick}>Answer C</button>
-        <button type="button" onClick={handleAnswerClick}>Answer D</button>
+        {['A', 'B', 'C', 'D'].map((letter, index) => (
+          <button
+            key={index}
+            type="button"
+            onClick={() => handleAnswerClick(index)}
+            disabled={disabledButtons[index]}
+            style={{
+              backgroundColor: buttonColors[index] || '',
+              color: buttonColors[index] ? 'white' : '',
+              transition: 'background-color 0.3s ease',
+              opacity: disabledButtons[index] ? 0.7 : 1,
+              cursor: disabledButtons[index] ? 'not-allowed' : 'pointer',
+            }}
+          >
+            Answer {letter}
+          </button>
+        ))}
       </div>
     </main>
   );
