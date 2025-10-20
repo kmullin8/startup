@@ -40,7 +40,7 @@ export default function App() {
 
         <Routes>
           <Route path='/' element={<Login setUser={setUser} />} exact />
-          <Route path='/play' element={<Play />} />
+          <Route path='/play' element={<Play user={user} />} />
           <Route path='/scores' element={<Scores />} />
           <Route path='*' element={<NotFound />} />
         </Routes>

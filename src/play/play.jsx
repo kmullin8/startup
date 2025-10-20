@@ -1,7 +1,7 @@
 import React from 'react';
 import './play.css';
 
-export function Play() {
+export function Play({ user }) {
   return (
     <main>
       <div
@@ -16,7 +16,7 @@ export function Play() {
         }}
       >
         <div className="players">
-          Player: <span className="player-name">player username</span>
+          Player: <span className="player-name">{user}</span>
         </div>
 
         <div className="score">
@@ -32,7 +32,7 @@ export function Play() {
       {/* Question text */}
       <p
         className="question-text"
-        style={{ textAlign: 'center', maxWidth: '900px'}}
+        style={{ textAlign: 'center', maxWidth: '900px' }}
       >
         txt for the question txt for the question txt for the question txt for the question txt
         for the question txt for the question txt for the question txt for the question
