@@ -2,14 +2,13 @@ import React from 'react';
 import './login.css';
 
 export function Login() {
-  const [text, setText] = React.useState('');
+  const [username, setUsername] = React.useState('');
+  const [password, setPassword] = React.useState('');
 
   function loginUser() {
-    console.log('login' + text);
-  }
-
-  function textChange(e) {
-    setText(e.target.value);
+    event.preventDefault();
+    localStorage.setItem('username', username);
+    localStorage.setItem('password', password);
   }
 
   return (
@@ -24,7 +23,7 @@ export function Login() {
               style={{ height: '1.5em', verticalAlign: 'middle', marginRight: '0.3em' }}
             />
           </span>
-          <input type="text" placeholder="your@email.com" onChange={textChange} />
+          <input type="text" placeholder="your@email.com" onChange={(e) => setUsername(e.target.value)} />
         </div>
         <div>
           <span>
@@ -34,7 +33,7 @@ export function Login() {
               style={{ height: '1.5em', verticalAlign: 'middle', marginRight: '0.3em' }}
             />
           </span>
-          <input type="password" placeholder="password" onChange={textChange} />
+          <input type="password" placeholder="password" onChange={(e) => setPassword(e.target.value)} />
         </div>
         <div className="button-row">
           <button onClick={loginUser}>Login</button>
