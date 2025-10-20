@@ -2,10 +2,20 @@ import React from 'react';
 import './login.css';
 
 export function Login() {
+  const [text, setText] = React.useState('');
+
+  function loginUser() {
+    console.log('login' + text);
+  }
+
+  function textChange(e) {
+    setText(e.target.value);
+  }
+
   return (
     <main>
       <h1>Welcome to Trivia Challenge 3000</h1>
-      <form method="get" action="play.html">
+      <form>
         <div>
           <span>
             <img
@@ -14,7 +24,7 @@ export function Login() {
               style={{ height: '1.5em', verticalAlign: 'middle', marginRight: '0.3em' }}
             />
           </span>
-          <input type="text" placeholder="your@email.com" />
+          <input type="text" placeholder="your@email.com" onChange={textChange} />
         </div>
         <div>
           <span>
@@ -24,10 +34,10 @@ export function Login() {
               style={{ height: '1.5em', verticalAlign: 'middle', marginRight: '0.3em' }}
             />
           </span>
-          <input type="password" placeholder="password" />
+          <input type="password" placeholder="password" onChange={textChange} />
         </div>
         <div className="button-row">
-          <button type="submit">Login</button>
+          <button onClick={loginUser}>Login</button>
         </div>
       </form>
     </main>
