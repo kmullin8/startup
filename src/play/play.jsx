@@ -128,18 +128,7 @@ export function Play({ user }) {
             {question.answers.map((ans) => `\n${ans}`).join('')}
           </p>
 
-          <div
-            className="answers"
-            style={{
-              display: 'grid',
-              gridTemplateColumns: '1fr 1fr',
-              gap: '1em',
-              justifyContent: 'center',
-              textAlign: 'center',
-              maxWidth: '600px',
-              margin: '2em auto',
-            }}
-          >
+          <div className="answers">
             {['A', 'B', 'C', 'D'].map((letter, index) => (
               <button
                 key={index}
@@ -161,6 +150,7 @@ export function Play({ user }) {
               </button>
             ))}
           </div>
+
         </>
       ) : (
         <p className="question-text" style={{ textAlign: 'center' }}>
