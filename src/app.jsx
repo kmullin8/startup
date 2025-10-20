@@ -8,6 +8,8 @@ import { Play } from './play/play';
 import { Scores } from './scores/scores';
 
 export default function App() {
+  const [user, setUser] = React.useState(localStorage.getItem('user') || null);
+
   return (
     <BrowserRouter>
       <div>
@@ -23,30 +25,24 @@ export default function App() {
 
           <nav>
             <menu>
-                <li className="nav-item">
-                    <NavLink className="nav-link" to="">
-                        Login
-                    </NavLink>
-                </li>
-                <li className="nav-item">
-                    <NavLink className="nav-link" to="play">
-                        Play
-                    </NavLink>
-                </li>
-                <li className="nav-item">
-                    <NavLink className="nav-link" to="scores">
-                        Scores
-                    </NavLink>
-                </li>
+              <li className="nav-item">
+                <NavLink className="nav-link" to="">Login</NavLink>
+              </li>
+              {user && <li className="nav-item">
+                <NavLink className="nav-link" to="play">Play</NavLink>
+              </li>}
+              <li className="nav-item">
+                <NavLink className="nav-link" to="scores">Scores</NavLink>
+              </li>
             </menu>
           </nav>
         </header>
 
         <Routes>
-            <Route path='/' element={<Login />} exact />
-            <Route path='/play' element={<Play />} />
-            <Route path='/scores' element={<Scores />} />
-            <Route path='*' element={<NotFound />} />
+          <Route path='/' element={<Login />} exact />
+          <Route path='/play' element={<Play />} />
+          <Route path='/scores' element={<Scores />} />
+          <Route path='*' element={<NotFound />} />
         </Routes>
 
         <footer>

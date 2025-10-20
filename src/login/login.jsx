@@ -2,12 +2,12 @@ import React from 'react';
 import './login.css';
 
 export function Login() {
-  const [username, setUsername] = React.useState('');
+  const [user, setuser] = React.useState('');
   const [password, setPassword] = React.useState('');
 
   function loginUser() {
     event.preventDefault();
-    localStorage.setItem('username', username);
+    localStorage.setItem('user', user);
     localStorage.setItem('password', password);
   }
 
@@ -23,7 +23,7 @@ export function Login() {
               style={{ height: '1.5em', verticalAlign: 'middle', marginRight: '0.3em' }}
             />
           </span>
-          <input type="text" placeholder="your@email.com" onChange={(e) => setUsername(e.target.value)} />
+          <input type="text" placeholder="your@email.com" onChange={(e) => setuser(e.target.value)} />
         </div>
         <div>
           <span>
