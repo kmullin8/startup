@@ -1,7 +1,7 @@
 import React from 'react';
 import './login.css';
 
-export function Login() {
+export function Login({ setUser }) {
   const [user, setuser] = React.useState('');
   const [password, setPassword] = React.useState('');
 
@@ -9,6 +9,7 @@ export function Login() {
     event.preventDefault();
     localStorage.setItem('user', user);
     localStorage.setItem('password', password);
+    setUser(user);
   }
 
   return (
