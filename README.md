@@ -137,8 +137,8 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **All functionality implemented or mocked out** - I did not complete this part of the deliverable.
-- [ ] **Hooks** - I did not complete this part of the deliverable.
+- [x] **All functionality implemented or mocked out** - I implemented all pages using React, including mock database functions for questions and scores, dynamic gameplay logic, and persistent login data in localStorage.
+- [x] **Hooks** - I used React useState for managing game state and useEffect for loading data, fetching questions, and handling the countdown timer and leaderboard updates.
 
 ## 🚀 Service deliverable
 
