@@ -1,15 +1,19 @@
 import React from 'react';
 import './login.css';
+import { useNavigate } from 'react-router-dom';
+import { use } from 'react';
 
 export function Login({ setUser }) {
   const [user, setuser] = React.useState('');
   const [password, setPassword] = React.useState('');
+  const navigate = useNavigate();
 
   function loginUser() {
     event.preventDefault();
     localStorage.setItem('user', user);
     localStorage.setItem('password', password);
     setUser(user);
+    navigate('/play');
   }
 
   return (
