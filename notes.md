@@ -274,3 +274,16 @@ Handling the toggling of the checkboxes was particularly interesting.
   ))}
 </div>
 ```
+
+
+First we need to follow the basic React setup that we discussed in the simple [Hello World React](../../webFrameworks/react/introduction/introduction.md#react-hello-world) app that we created in previous instruction. This includes:
+
+1. Creating an NPM project, installing Vite, and installing React.
+   ```sh
+   npm init -y
+   npm install vite@latest -D
+   npm install react react-dom react-router-dom
+   ```
+1. Configuring Vite to proxy API requests through to the backend when debugging.
+1. Creating a basic `index.html` file that loads your React application.
+1. Creating your React application in `index.jsx`.
