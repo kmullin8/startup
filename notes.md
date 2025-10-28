@@ -287,3 +287,4 @@ First we need to follow the basic React setup that we discussed in the simple [H
 1. Configuring Vite to proxy API requests through to the backend when debugging.
 1. Creating a basic `index.html` file that loads your React application.
 1. Creating your React application in `index.jsx`.
+2. start the frontend by running npm run dev from a console window.
