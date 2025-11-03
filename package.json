@@ -20,13 +20,13 @@
   },
   "homepage": "https://github.com/kmullin8/startup#readme",
   "devDependencies": {
-    "vite": "^7.1.11"
+    "vite": "^7.1.12"
   },
   "dependencies": {
     "bootstrap": "^5.3.8",
     "react": "^19.2.0",
     "react-bootstrap": "^2.10.10",
     "react-dom": "^19.2.0",
-    "react-router-dom": "^7.9.3"
+    "react-router-dom": "^7.9.5"
   }
 }
