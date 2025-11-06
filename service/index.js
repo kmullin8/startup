@@ -26,6 +26,11 @@ app.listen(port, () => {
 
 // CreateAuth a new user
 apiRouter.post('/auth/create', async (req, res) => {
+
+    //debugging logs
+    // console.log("Entered create user endpoint");
+    // console.log('Creating user:', req.body.email);
+
     if (await findUser('email', req.body.email)) {
         res.status(409).send({ msg: 'Existing user' });
     } else {
@@ -38,6 +43,11 @@ apiRouter.post('/auth/create', async (req, res) => {
 
 // GetAuth login an existing user
 apiRouter.post('/auth/login', async (req, res) => {
+
+    //debugging logs
+    // console.log("Entered login endpoint");
+    // console.log('Logging in user:', req.body.email);
+
     const user = await findUser('email', req.body.email);
     if (user) {
         if (await bcrypt.compare(req.body.password, user.password)) {
@@ -52,6 +62,10 @@ apiRouter.post('/auth/login', async (req, res) => {
 
 // DeleteAuth logout a user
 apiRouter.delete('/auth/logout', async (req, res) => {
+
+    //debugging log
+    //console.log("Entered logout endpoint");
+
     const user = await findUser('token', req.cookies[authCookieName]);
     if (user) {
         delete user.token;
