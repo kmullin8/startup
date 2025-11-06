@@ -50,6 +50,7 @@ nav menu li {
   border: 2px outset #fff;
   background-color: #C0C0C0;
   box-shadow: 2px 2px 0px black;
+  font-weight: bold;
 }
 
 nav menu li:hover {
