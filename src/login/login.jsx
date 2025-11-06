@@ -6,7 +6,24 @@ export function Login({ setUser }) {
   const [user, setuser] = React.useState(localStorage.getItem('user') || '');
   const [password, setPassword] = React.useState('');
   const [error, setError] = React.useState('');
+  const [tip, setTip] = React.useState(''); // 🟡 random tip
   const navigate = useNavigate();
+
+  // 🟡 Fetch random tip from third-party API
+  async function fetchTip() {
+    try {
+      const response = await fetch('https://api.adviceslip.com/advice');
+      const data = await response.json();
+      setTip(data.slip.advice);
+    } catch (err) {
+      console.error('Failed to fetch tip:', err);
+      setTip('Failed to load tip. Try refreshing!');
+    }
+  }
+
+  React.useEffect(() => {
+    fetchTip();
+  }, []);
 
   async function loginOrCreate(endpoint) {
     try {
@@ -60,6 +77,7 @@ export function Login({ setUser }) {
   return (
     <main>
       <h1>Welcome to Trivia Challenge 3000</h1>
+
       <form>
         {!loggedIn && (
           <>
@@ -68,7 +86,11 @@ export function Login({ setUser }) {
                 <img
                   src="envelope.svg"
                   alt="email logo"
-                  style={{ height: '1.5em', verticalAlign: 'middle', marginRight: '0.3em' }}
+                  style={{
+                    height: '1.5em',
+                    verticalAlign: 'middle',
+                    marginRight: '0.3em',
+                  }}
                 />
               </span>
               <input
@@ -77,12 +99,17 @@ export function Login({ setUser }) {
                 onChange={(e) => setuser(e.target.value)}
               />
             </div>
+
             <div>
               <span>
                 <img
                   src="lock.svg"
                   alt="password logo"
-                  style={{ height: '1.5em', verticalAlign: 'middle', marginRight: '0.3em' }}
+                  style={{
+                    height: '1.5em',
+                    verticalAlign: 'middle',
+                    marginRight: '0.3em',
+                  }}
                 />
               </span>
               <input
@@ -91,6 +118,7 @@ export function Login({ setUser }) {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
+
             <div className="button-row">
               <button onClick={handleLogin}>Login</button>
               <button onClick={handleCreate}>Create</button>
@@ -113,6 +141,8 @@ export function Login({ setUser }) {
 
         {error && <p style={{ color: 'red' }}>{error}</p>}
       </form>
+
+      {tip && <p className="login-tip">“{tip}”</p>}
     </main>
   );
 }

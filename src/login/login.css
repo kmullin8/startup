@@ -83,7 +83,8 @@ form img {
 }
 
 .user-box .user-name {
-  color: #000080; /* navy blue accent */
+  color: #000080;
+  /* navy blue accent */
 }
 
 /* put logout button on its own line, centered */
@@ -103,5 +104,56 @@ form img {
 }
 
 .logout-row button:hover {
-    background-color: #000080;
+  background-color: #000080;
+}
+
+/* Main container: establishes positioning context */
+.login-main {
+  position: relative;
+  min-height: 80vh; /* ensures vertical breathing room */
+}
+
+/* Tip: anchored inside login area, bottom-right corner */
+.login-tip {
+  position: absolute;
+  bottom: 6rem;           /* a bit higher from bottom edge */
+  right: 7rem;            /* spacing from right edge */
+  max-width: 260px;
+  color: gold;
+  font-style: italic;
+  font-size: 1.1em;
+  text-align: right;
+  text-shadow: 2px 2px 0 black;
+  animation: wobble 2s infinite ease-in-out;
+  z-index: 5;
+  pointer-events: none;
+  line-height: 1.4;
+  user-select: none;
+  transition: bottom 0.3s ease;
+}
+
+/* Prevent overlap when window height is short */
+@media (max-height: 700px) {
+  .login-tip {
+    position: static;          /* no longer absolute */
+    display: block;
+    margin: 1rem auto 0 auto;  /* centered above footer */
+    text-align: center;
+  }
+}
+
+/* Handle narrow width */
+@media (max-width: 600px) {
+  .login-tip {
+    bottom: 1rem;
+    right: 1rem;
+    font-size: 0.9em;
+    max-width: 200px;
+  }
+}
+
+/* Wobble animation */
+@keyframes wobble {
+  0%, 100% { transform: rotate(-5deg) scale(1); }
+  50% { transform: rotate(5deg) scale(1.1); }
 }
