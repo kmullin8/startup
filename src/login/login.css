@@ -48,3 +48,60 @@ form img {
   /* Drop shadow */
   box-shadow: 2px 2px 0px black;
 }
+
+/* Logged-in container */
+.logged-in {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1.5em;
+}
+
+/* "Title bar" style box for Logged in as */
+.user-box {
+  background-color: #C0C0C0;
+  color: black;
+  padding: 0.4em 1em;
+  font-weight: bold;
+  font-size: 1.2em;
+  display: inline-block;
+  text-align: center;
+
+  /* Beveled 3D effect (same as title bar) */
+  border-top: 4px solid #fff;
+  border-left: 4px solid #fff;
+  border-bottom: 4px solid #808080;
+  border-right: 4px solid #808080;
+
+  /* Drop shadow */
+  box-shadow: 4px 4px 0px black;
+}
+
+/* spacing and layout for username label and name */
+.user-box .user-label {
+  margin-right: 0.5em;
+}
+
+.user-box .user-name {
+  color: #000080; /* navy blue accent */
+}
+
+/* put logout button on its own line, centered */
+.logout-row {
+  margin-top: 1em;
+}
+
+.logout-row button {
+  background-color: #C0C0C0;
+  border: 3px solid #808080;
+  border-top-color: #fff;
+  border-left-color: #fff;
+  padding: 0.4em 1.5em;
+  font-weight: bold;
+  box-shadow: 3px 3px 0px black;
+  cursor: pointer;
+}
+
+.logout-row button:hover {
+    background-color: #000080;
+}
