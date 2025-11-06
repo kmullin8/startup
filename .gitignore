@@ -1,3 +1,4 @@
 # Ignore private keys
 *.pem
 node_modules
+cookies.txt
