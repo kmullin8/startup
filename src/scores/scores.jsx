@@ -2,27 +2,21 @@ import React from 'react';
 import './scores.css';
 
 export function Scores() {
-  const [scores, setScores] = React.useState([]); // leaderboard entries
+  const [scores, setScores] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
 
-  // Mock database data
-  const mockScores = [
-    { id: 1, name: '도윤 이', score: 34, date: 'May 20, 2021' },
-    { id: 2, name: 'Annie James', score: 29, date: 'June 2, 2021' },
-    { id: 3, name: 'Gunter Spears', score: 7, date: 'July 3, 2020' },
-    { id: 4, name: 'Kaden Mullin', score: 56, date: 'Oct 20, 2025' },
-  ];
-
-  // Simulate fetching scores from a database
   async function fetchScores() {
-    // simulate network delay
-    await new Promise((resolve) => setTimeout(resolve, 500));
-    // in a real app, you’d do: const res = await fetch('/api/scores');
-    // const data = await res.json();
-    return mockScores;
+    try {
+      const res = await fetch('/api/scores', { credentials: 'include' }); // ✅ include cookie
+      if (!res.ok) throw new Error('Failed to fetch scores');
+      const data = await res.json();
+      return data.sort((a, b) => b.score - a.score).slice(0, 5); // ✅ only top 5
+    } catch (err) {
+      console.error(err);
+      return [];
+    }
   }
 
-  // Fetch once when component mounts
   React.useEffect(() => {
     fetchScores().then((data) => {
       setScores(data);
@@ -46,7 +40,7 @@ export function Scores() {
           </thead>
           <tbody>
             {scores.map((entry, index) => (
-              <tr key={entry.id}>
+              <tr key={`${entry.name}-${index}`}>
                 <td>{index + 1}</td>
                 <td>{entry.name}</td>
                 <td>{entry.score}</td>

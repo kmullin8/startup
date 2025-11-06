@@ -86,11 +86,15 @@ const verifyAuth = async (req, res, next) => {
 
 // GetScores
 apiRouter.get('/scores', verifyAuth, (_req, res) => {
+    //debugging log
+    console.log("Entered get scores endpoint");
     res.send(scores);
 });
 
 // SubmitScore
 apiRouter.post('/score', verifyAuth, (req, res) => {
+    //debugging log
+    console.log("Entered post score endpoint");
     scores = updateScores(req.body);
     res.send(scores);
 });
@@ -107,22 +111,20 @@ app.use((_req, res) => {
 
 // updateScores considers a new score for inclusion in the high scores.
 function updateScores(newScore) {
-    let found = false;
-    for (const [i, prevScore] of scores.entries()) {
-        if (newScore.score > prevScore.score) {
-            scores.splice(i, 0, newScore);
-            found = true;
-            break;
-        }
+    console.log("Updating scores with new score:", newScore);
+
+    if (!newScore || !newScore.name || !newScore.score) {
+        console.log("Invalid score object, ignoring");
+        return scores;
     }
 
-    if (!found) {
-        scores.push(newScore);
-    }
+    scores.push(newScore);
 
-    if (scores.length > 10) {
-        scores.length = 10;
-    }
+    // Sort descending
+    scores.sort((a, b) => b.score - a.score);
+
+    // Keep only top 5
+    if (scores.length > 5) scores.length = 5;
 
     return scores;
 }

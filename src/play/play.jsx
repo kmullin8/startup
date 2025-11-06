@@ -1,63 +1,54 @@
 import React from 'react';
 import './play.css';
+import { questionsDB } from '../data/questions.js';
 
 export function Play({ user }) {
   const [score, setScore] = React.useState(0);
   const [buttonColors, setButtonColors] = React.useState([null, null, null, null]);
   const [disabledButtons, setDisabledButtons] = React.useState([false, false, false, false]);
   const [timeRemaining, setTimeRemaining] = React.useState(30);
-  const [question, setQuestion] = React.useState(null); // store actual question object
-
-  // Mock "database" questions
-  const mockQuestions = [
-    {
-      id: 1,
-      text: 'What is the capital of France?',
-      answers: ['A) Paris', 'B) Rome', 'C) Madrid', 'D) Berlin'],
-      correctIndex: 0,
-    },
-    {
-      id: 2,
-      text: 'Which planet is known as the Red Planet?',
-      answers: ['A) Earth', 'B) Mars', 'C) Jupiter', 'D) Venus'],
-      correctIndex: 1,
-    },
-    {
-      id: 3,
-      text: 'Who wrote "Romeo and Juliet"?',
-      answers: ['A) Mark Twain', 'B) Charles Dickens', 'C) William Shakespeare', 'D) Jane Austen'],
-      correctIndex: 2,
-    },
-  ];
+  const [question, setQuestion] = React.useState(null);
+  const [gameOver, setGameOver] = React.useState(false);
 
   // Simulate fetching from a database
   async function fetchQuestion() {
-    // simulate network delay (later, replace with fetch('/api/question'))
-    await new Promise((resolve) => setTimeout(resolve, 300));
-
-    // pick a random question for now
-    const randomIndex = Math.floor(Math.random() * mockQuestions.length);
-    return mockQuestions[randomIndex];
+    await new Promise((resolve) => setTimeout(resolve, 300)); // simulate delay
+    const randomIndex = Math.floor(Math.random() * questionsDB.length);
+    return questionsDB[randomIndex];
   }
 
-  // On mount, fetch the first question
+  // Fetch the first question on mount
   React.useEffect(() => {
     fetchQuestion().then(setQuestion);
   }, []);
 
   // Countdown timer
   React.useEffect(() => {
-    if (timeRemaining <= 0) return;
+    if (timeRemaining === 0) {
+      if (score > 0) {
+        submitScore().then(() => console.log('Score saved automatically.'));
+      }
+      setGameOver(true);
+      setDisabledButtons([true, true, true, true]); // lock buttons when game ends
+      return;
+    }
+
     const timer = setInterval(() => setTimeRemaining((prev) => prev - 1), 1000);
     return () => clearInterval(timer);
   }, [timeRemaining]);
 
-  function handleAnswerClick(index) {
+  // --- FIXED handleAnswerClick ---
+  async function handleAnswerClick(index) {
+    // Prevent spam clicking or answering twice
+    if (disabledButtons.some((d) => d)) return;
     if (!question) return;
 
     const isCorrect = index === question.correctIndex;
+
+    // Immediately disable buttons
+    setDisabledButtons([true, true, true, true]);
+
     const newColors = [...buttonColors];
-    const newDisabled = [true, true, true, true];
 
     if (isCorrect) {
       const newScore = score + 25;
@@ -70,16 +61,16 @@ export function Play({ user }) {
     }
 
     setButtonColors(newColors);
-    setDisabledButtons(newDisabled);
 
-    setTimeout(async () => {
-      setButtonColors([null, null, null, null]);
-      setDisabledButtons([false, false, false, false]);
+    await new Promise((resolve) => setTimeout(resolve, 500));
 
-      // fetch next question from “database”
-      const nextQuestion = await fetchQuestion();
-      setQuestion(nextQuestion);
-    }, 900);
+    // Fetch next question safely
+    const nextQuestion = await fetchQuestion();
+    setQuestion(nextQuestion);
+
+    // Reset for new question
+    setButtonColors([null, null, null, null]);
+    setDisabledButtons([false, false, false, false]);
   }
 
   function formatTime(seconds) {
@@ -88,11 +79,29 @@ export function Play({ user }) {
     return `${m}:${s.toString().padStart(2, '0')}`;
   }
 
+  async function submitScore() {
+    try {
+      await fetch('/api/score', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include', // important so cookies (auth) are sent
+        body: JSON.stringify({
+          name: user,
+          score: score,
+          date: new Date().toLocaleDateString(),
+        }),
+      });
+    } catch (err) {
+      console.error('Failed to submit score:', err);
+    }
+  }
+
   async function resetGame() {
     setScore(0);
     setTimeRemaining(30);
     setButtonColors([null, null, null, null]);
     setDisabledButtons([false, false, false, false]);
+    setGameOver(false);
     localStorage.removeItem('score');
 
     const nextQuestion = await fetchQuestion();
@@ -150,7 +159,6 @@ export function Play({ user }) {
               </button>
             ))}
           </div>
-
         </>
       ) : (
         <p className="question-text" style={{ textAlign: 'center' }}>
@@ -158,9 +166,12 @@ export function Play({ user }) {
         </p>
       )}
 
-      {/* Play Again */}
-      {timeRemaining === 0 && (
+      {/* Game Over Message + Play Again */}
+      {gameOver && (
         <div className="play-again-container">
+          <p style={{ textAlign: 'center', marginBottom: '1em', fontWeight: 'bold' }}>
+            ⏰ Game Over! Your score has been saved.
+          </p>
           <button type="button" className="play-again-button" onClick={resetGame}>
             Play Again
           </button>
