@@ -3,7 +3,7 @@ import './login.css';
 import { useNavigate } from 'react-router-dom';
 
 export function Login({ setUser }) {
-  const [user, setuser] = React.useState('');
+  const [user, setuser] = React.useState(localStorage.getItem('user') || '');
   const [password, setPassword] = React.useState('');
   const [error, setError] = React.useState('');
   const navigate = useNavigate();
@@ -40,26 +40,77 @@ export function Login({ setUser }) {
     loginOrCreate('/api/auth/create');
   }
 
+  async function handleLogout(e) {
+    e.preventDefault();
+    try {
+      await fetch('/api/auth/logout', { method: 'DELETE' });
+    } catch (err) {
+      console.error('Logout failed:', err);
+    }
+
+    localStorage.removeItem('user');
+    setUser(null);
+    setuser('');
+    setPassword('');
+    navigate('/');
+  }
+
+  const loggedIn = !!localStorage.getItem('user');
+
   return (
     <main>
       <h1>Welcome to Trivia Challenge 3000</h1>
       <form>
-        <div>
-          <span>
-            <img src="envelope.svg" alt="email logo" style={{ height: '1.5em', verticalAlign: 'middle', marginRight: '0.3em' }} />
-          </span>
-          <input type="text" placeholder="your@email.com" onChange={(e) => setuser(e.target.value)} />
-        </div>
-        <div>
-          <span>
-            <img src="lock.svg" alt="password logo" style={{ height: '1.5em', verticalAlign: 'middle', marginRight: '0.3em' }} />
-          </span>
-          <input type="password" placeholder="password" onChange={(e) => setPassword(e.target.value)} />
-        </div>
-        <div className="button-row">
-          <button onClick={handleLogin}>Login</button>
-          <button onClick={handleCreate}>Create</button>
-        </div>
+        {!loggedIn && (
+          <>
+            <div>
+              <span>
+                <img
+                  src="envelope.svg"
+                  alt="email logo"
+                  style={{ height: '1.5em', verticalAlign: 'middle', marginRight: '0.3em' }}
+                />
+              </span>
+              <input
+                type="text"
+                placeholder="your@email.com"
+                onChange={(e) => setuser(e.target.value)}
+              />
+            </div>
+            <div>
+              <span>
+                <img
+                  src="lock.svg"
+                  alt="password logo"
+                  style={{ height: '1.5em', verticalAlign: 'middle', marginRight: '0.3em' }}
+                />
+              </span>
+              <input
+                type="password"
+                placeholder="password"
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+            <div className="button-row">
+              <button onClick={handleLogin}>Login</button>
+              <button onClick={handleCreate}>Create</button>
+            </div>
+          </>
+        )}
+
+        {loggedIn && (
+          <div className="logged-in">
+            <div className="user-box">
+              <span className="user-label">Logged in as:</span>
+              <span className="user-name">{localStorage.getItem('user')}</span>
+            </div>
+
+            <div className="button-row logout-row">
+              <button onClick={handleLogout}>Logout</button>
+            </div>
+          </div>
+        )}
+
         {error && <p style={{ color: 'red' }}>{error}</p>}
       </form>
     </main>
