@@ -103,7 +103,7 @@ apiRouter.post('/score', verifyAuth, async (req, res) => {
 
 // Middleware to verify that the user is authorized to call an endpoint
 const verifyAuth = async (req, res, next) => {
-    const user = await findUser('token', req.cookies[authCookieName]);
+    const user = await db.getUserByToken(req.cookies[authCookieName]);
     if (user) {
         next();
     } else {
@@ -121,48 +121,10 @@ app.use((_req, res) => {
     res.sendFile('index.html', { root: 'public' });
 });
 
-// updateScores considers a new score for inclusion in the high scores.
-function updateScores(newScore) {
-    console.log("Updating scores with new score:", newScore);
-
-    if (!newScore || !newScore.name || !newScore.score) {
-        console.log("Invalid score object, ignoring");
-        return scores;
-    }
-
-    scores.push(newScore);
-
-    // Sort descending
-    scores.sort((a, b) => b.score - a.score);
-
-    // Keep only top 5
-    if (scores.length > 5) scores.length = 5;
-
-    return scores;
-}
-
-async function createUser(email, password) {
-    const passwordHash = await bcrypt.hash(password, 10);
-
-    const user = {
-        email: email,
-        password: passwordHash,
-        token: uuid.v4(),
-    };
-    users.push(user);
-
-    return user;
-}
-
-async function findUser(field, value) {
-    if (!value) return null;
-
-    return users.find((u) => u[field] === value);
-}
-
 // setAuthCookie in the HTTP response
 function setAuthCookie(res, authToken) {
     res.cookie(authCookieName, authToken, {
+        maxAge: 1000 * 60 * 60 * 24 * 365,
         secure: true,
         httpOnly: true,
         sameSite: 'strict',
