@@ -33,20 +33,20 @@ apiRouter.post('/auth/create', async (req, res) => {
     // console.log("Entered create user endpoint");
     // console.log('Creating user:', req.body.email);
 
-  const existing = await db.getUser(req.body.email);
-  if (existing) {
-    res.status(409).send({ msg: 'Existing user' });
-  } else {
-    const passwordHash = await bcrypt.hash(req.body.password, 10);
-    const user = {
-      email: req.body.email,
-      password: passwordHash,
-      token: uuid.v4(),
-    };
-    await db.addUser(user);
-    setAuthCookie(res, user.token);
-    res.send({ email: user.email });
-  }
+    const existing = await db.getUser(req.body.email);
+    if (existing) {
+        res.status(409).send({ msg: 'Existing user' });
+    } else {
+        const passwordHash = await bcrypt.hash(req.body.password, 10);
+        const user = {
+            email: req.body.email,
+            password: passwordHash,
+            token: uuid.v4(),
+        };
+        await db.addUser(user);
+        setAuthCookie(res, user.token);
+        res.send({ email: user.email });
+    }
 });
 
 // GetAuth login an existing user
@@ -56,15 +56,15 @@ apiRouter.post('/auth/login', async (req, res) => {
     // console.log("Entered login endpoint");
     // console.log('Logging in user:', req.body.email);
 
-  const user = await db.getUser(req.body.email);
-  if (user && await bcrypt.compare(req.body.password, user.password)) {
-    user.token = uuid.v4();
-    await db.updateUser(user);
-    setAuthCookie(res, user.token);
-    res.send({ email: user.email });
-  } else {
-    res.status(401).send({ msg: 'Unauthorized' });
-  }
+    const user = await db.getUser(req.body.email);
+    if (user && await bcrypt.compare(req.body.password, user.password)) {
+        user.token = uuid.v4();
+        await db.updateUser(user);
+        setAuthCookie(res, user.token);
+        res.send({ email: user.email });
+    } else {
+        res.status(401).send({ msg: 'Unauthorized' });
+    }
 });
 
 // DeleteAuth logout a user
@@ -73,13 +73,22 @@ apiRouter.delete('/auth/logout', async (req, res) => {
     //debugging log
     //console.log("Entered logout endpoint");
 
-  const user = await db.getUserByToken(req.cookies[authCookieName]);
-  if (user) {
-    delete user.token;
-    await db.updateUser(user);
-  }
-  res.clearCookie(authCookieName);
-  res.status(204).end();
+    const user = await db.getUserByToken(req.cookies[authCookieName]);
+    if (user) {
+        delete user.token;
+        await db.updateUser(user);
+    }
+    res.clearCookie(authCookieName);
+    res.status(204).end();
+});
+
+// GetScores
+apiRouter.get('/scores', verifyAuth, async (_req, res) => {
+
+    //debugging log
+    //console.log("Entered get scores endpoint");
+    const scores = await db.getHighScores();
+    res.send(scores);
 });
 
 // Middleware to verify that the user is authorized to call an endpoint
@@ -91,13 +100,6 @@ const verifyAuth = async (req, res, next) => {
         res.status(401).send({ msg: 'Unauthorized' });
     }
 };
-
-// GetScores
-apiRouter.get('/scores', verifyAuth, (_req, res) => {
-    //debugging log
-    console.log("Entered get scores endpoint");
-    res.send(scores);
-});
 
 // SubmitScore
 apiRouter.post('/score', verifyAuth, (req, res) => {
