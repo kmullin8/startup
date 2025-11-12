@@ -73,12 +73,13 @@ apiRouter.delete('/auth/logout', async (req, res) => {
     //debugging log
     //console.log("Entered logout endpoint");
 
-    const user = await findUser('token', req.cookies[authCookieName]);
-    if (user) {
-        delete user.token;
-    }
-    res.clearCookie(authCookieName);
-    res.status(204).end();
+  const user = await db.getUserByToken(req.cookies[authCookieName]);
+  if (user) {
+    delete user.token;
+    await db.updateUser(user);
+  }
+  res.clearCookie(authCookieName);
+  res.status(204).end();
 });
 
 // Middleware to verify that the user is authorized to call an endpoint
