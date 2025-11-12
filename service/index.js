@@ -78,6 +78,16 @@ apiRouter.delete('/auth/logout', async (req, res) => {
     res.status(204).end();
 });
 
+// Middleware to verify that the user is authorized to call an endpoint
+const verifyAuth = async (req, res, next) => {
+    const user = await db.getUserByToken(req.cookies[authCookieName]);
+    if (user) {
+        next();
+    } else {
+        res.status(401).send({ msg: 'Unauthorized' });
+    }
+};
+
 // GetScores
 apiRouter.get('/scores', verifyAuth, async (_req, res) => {
 
@@ -96,16 +106,6 @@ apiRouter.post('/score', verifyAuth, async (req, res) => {
     const scores = await db.getHighScores();
     res.send(scores);
 });
-
-// Middleware to verify that the user is authorized to call an endpoint
-const verifyAuth = async (req, res, next) => {
-    const user = await db.getUserByToken(req.cookies[authCookieName]);
-    if (user) {
-        next();
-    } else {
-        res.status(401).send({ msg: 'Unauthorized' });
-    }
-};
 
 // Default error handler
 app.use(function (err, req, res, next) {
