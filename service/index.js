@@ -1,3 +1,5 @@
+const db = require('./database');
+
 const express = require('express');
 const app = express();
 
@@ -31,14 +33,20 @@ apiRouter.post('/auth/create', async (req, res) => {
     // console.log("Entered create user endpoint");
     // console.log('Creating user:', req.body.email);
 
-    if (await findUser('email', req.body.email)) {
-        res.status(409).send({ msg: 'Existing user' });
-    } else {
-        const user = await createUser(req.body.email, req.body.password);
-
-        setAuthCookie(res, user.token);
-        res.send({ email: user.email });
-    }
+  const existing = await db.getUser(req.body.email);
+  if (existing) {
+    res.status(409).send({ msg: 'Existing user' });
+  } else {
+    const passwordHash = await bcrypt.hash(req.body.password, 10);
+    const user = {
+      email: req.body.email,
+      password: passwordHash,
+      token: uuid.v4(),
+    };
+    await db.addUser(user);
+    setAuthCookie(res, user.token);
+    res.send({ email: user.email });
+  }
 });
 
 // GetAuth login an existing user
