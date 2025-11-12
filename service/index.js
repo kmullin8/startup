@@ -14,10 +14,6 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.static('public'));
 
-// In-memory data stores
-let users = [];
-let scores = [];
-
 // Router for service endpoints
 let apiRouter = express.Router();
 app.use(`/api`, apiRouter);
