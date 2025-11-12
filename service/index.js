@@ -91,6 +91,16 @@ apiRouter.get('/scores', verifyAuth, async (_req, res) => {
     res.send(scores);
 });
 
+// SubmitScore
+apiRouter.post('/score', verifyAuth, async (req, res) => {
+
+    //debugging log
+    //console.log("Entered post score endpoint");
+    await db.addScore(req.body);
+    const scores = await db.getHighScores();
+    res.send(scores);
+});
+
 // Middleware to verify that the user is authorized to call an endpoint
 const verifyAuth = async (req, res, next) => {
     const user = await findUser('token', req.cookies[authCookieName]);
@@ -100,14 +110,6 @@ const verifyAuth = async (req, res, next) => {
         res.status(401).send({ msg: 'Unauthorized' });
     }
 };
-
-// SubmitScore
-apiRouter.post('/score', verifyAuth, (req, res) => {
-    //debugging log
-    console.log("Entered post score endpoint");
-    scores = updateScores(req.body);
-    res.send(scores);
-});
 
 // Default error handler
 app.use(function (err, req, res, next) {
