@@ -163,8 +163,8 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Backend listens for WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **Frontend makes WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **Data sent over WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **WebSocket data displayed** - I did not complete this part of the deliverable.
-- [ ] **Application is fully functional** - I did not complete this part of the deliverable.
+- [x] **Backend listens for WebSocket connection** – Added `peerProxy.js` and attached it in `index.js`.
+- [x] **Frontend makes WebSocket connection** – Implemented `gameNotifier.js` to connect to `/ws`.
+- [x] **Data sent over WebSocket connection** – Broadcast gameplay events (start, correct, wrong, end).
+- [x] **WebSocket data displayed** – Added `ActivityFeed` showing the 5 most recent events.
+- [x] **Application is fully functional** – Real-time updates work across users; gameplay and scoring operate normally.
