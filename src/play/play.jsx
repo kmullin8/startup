@@ -1,6 +1,9 @@
+// src/play/play.jsx
 import React from 'react';
 import './play.css';
 import { questionsDB } from '../data/questions.js';
+import { GameEvent, GameNotifier } from './gameNotifier';
+import { ActivityFeed } from './ActivityFeed';
 
 export function Play({ user }) {
   const [score, setScore] = React.useState(0);
@@ -17,10 +20,15 @@ export function Play({ user }) {
     return questionsDB[randomIndex];
   }
 
-  // Fetch the first question on mount
+  // Fetch the first question on mount and broadcast a "start" event
   React.useEffect(() => {
-    fetchQuestion().then(setQuestion);
-  }, []);
+    fetchQuestion().then((q) => {
+      setQuestion(q);
+      if (user) {
+        GameNotifier.broadcastEvent(user, GameEvent.Start, {});
+      }
+    });
+  }, [user]);
 
   // Countdown timer
   React.useEffect(() => {
@@ -35,9 +43,9 @@ export function Play({ user }) {
 
     const timer = setInterval(() => setTimeRemaining((prev) => prev - 1), 1000);
     return () => clearInterval(timer);
-  }, [timeRemaining]);
+  }, [timeRemaining, score]);
 
-  // --- FIXED handleAnswerClick ---
+  // Handle answer click
   async function handleAnswerClick(index) {
     // Prevent spam clicking or answering twice
     if (disabledButtons.some((d) => d)) return;
@@ -55,9 +63,19 @@ export function Play({ user }) {
       setScore(newScore);
       localStorage.setItem('score', newScore);
       newColors[index] = 'green';
+
+      // Broadcast a correct answer event
+      if (user) {
+        GameNotifier.broadcastEvent(user, GameEvent.Correct, { score: newScore });
+      }
     } else {
       newColors[index] = 'red';
       newColors[question.correctIndex] = 'green';
+
+      // Broadcast a wrong answer event
+      if (user) {
+        GameNotifier.broadcastEvent(user, GameEvent.Wrong, {});
+      }
     }
 
     setButtonColors(newColors);
@@ -91,6 +109,11 @@ export function Play({ user }) {
           date: new Date().toLocaleDateString(),
         }),
       });
+
+      // Broadcast game end with final score
+      if (user) {
+        GameNotifier.broadcastEvent(user, GameEvent.End, { score });
+      }
     } catch (err) {
       console.error('Failed to submit score:', err);
     }
@@ -106,13 +129,20 @@ export function Play({ user }) {
 
     const nextQuestion = await fetchQuestion();
     setQuestion(nextQuestion);
+
+    // Broadcast a new game start
+    if (user) {
+      GameNotifier.broadcastEvent(user, GameEvent.Start, {});
+    }
   }
 
   return (
     <main>
+      {/* Status bar at top */}
       <div className="status-bar">
         <div className="players">
-          Player: <span className="player-name">{user}</span>
+          Player:
+          <span className="player-name">{user}</span>
         </div>
 
         <div className="score">
@@ -125,58 +155,65 @@ export function Play({ user }) {
         </div>
       </div>
 
-      {/* Display question only when loaded */}
-      {question ? (
-        <>
-          <p
-            className="question-text"
-            style={{ textAlign: 'center', maxWidth: '900px', whiteSpace: 'pre-line' }}
-          >
-            {question.text}
-            {'\n'}
-            {question.answers.map((ans) => `\n${ans}`).join('')}
-          </p>
+      {/* Layout: activity on left, game on right */}
+      <div className="play-layout">
+        <ActivityFeed user={user} />
 
-          <div className="answers">
-            {['A', 'B', 'C', 'D'].map((letter, index) => (
-              <button
-                key={index}
-                type="button"
-                onClick={() => handleAnswerClick(index)}
-                disabled={disabledButtons[index] || timeRemaining <= 0}
-                style={{
-                  backgroundColor: buttonColors[index] || '',
-                  color: buttonColors[index] ? 'white' : '',
-                  transition: 'background-color 0.3s ease',
-                  opacity: disabledButtons[index] || timeRemaining <= 0 ? 0.7 : 1,
-                  cursor:
-                    disabledButtons[index] || timeRemaining <= 0
-                      ? 'not-allowed'
-                      : 'pointer',
-                }}
+        <div className="game-content">
+          {/* Display question only when loaded */}
+          {question ? (
+            <>
+              <p
+                className="question-text"
+                style={{ textAlign: 'center', maxWidth: '900px', whiteSpace: 'pre-line' }}
               >
-                Answer {letter}
-              </button>
-            ))}
-          </div>
-        </>
-      ) : (
-        <p className="question-text" style={{ textAlign: 'center' }}>
-          Loading question...
-        </p>
-      )}
+                {question.text}
+                {'\n'}
+                {question.answers.map((ans) => `\n${ans}`).join('')}
+              </p>
 
-      {/* Game Over Message + Play Again */}
-      {gameOver && (
-        <div className="play-again-container">
-          <p style={{ textAlign: 'center', marginBottom: '1em', fontWeight: 'bold' }}>
-            ⏰ Game Over! Your score has been saved.
-          </p>
-          <button type="button" className="play-again-button" onClick={resetGame}>
-            Play Again
-          </button>
+              <div className="answers">
+                {['A', 'B', 'C', 'D'].map((letter, index) => (
+                  <button
+                    key={index}
+                    type="button"
+                    onClick={() => handleAnswerClick(index)}
+                    disabled={disabledButtons[index] || timeRemaining <= 0}
+                    style={{
+                      backgroundColor: buttonColors[index] || '',
+                      color: buttonColors[index] ? 'white' : '',
+                      transition: 'background-color 0.3s ease',
+                      opacity: disabledButtons[index] || timeRemaining <= 0 ? 0.7 : 1,
+                      cursor:
+                        disabledButtons[index] || timeRemaining <= 0
+                          ? 'not-allowed'
+                          : 'pointer',
+                    }}
+                  >
+                    Answer {letter}
+                  </button>
+                ))}
+              </div>
+            </>
+          ) : (
+            <p className="question-text" style={{ textAlign: 'center' }}>
+              Loading question...
+            </p>
+          )}
+
+          {/* Game Over Message + Play Again */}
+          {gameOver && (
+            <div className="play-again-container">
+              <p style={{ textAlign: 'center', marginBottom: '1em', fontWeight: 'bold' }}>
+                Game Over! Your score has been saved.
+              </p>
+              <button type="button" className="play-again-button" onClick={resetGame}>
+                Play Again
+              </button>
+            </div>
+          )}
         </div>
-      )}
+      </div>
     </main>
   );
 }

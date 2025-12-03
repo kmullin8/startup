@@ -1,4 +1,6 @@
-/* Status bar (top of main) */
+/* ------------------------------- */
+/* Status Bar (top information bar)
+/* ------------------------------- */
 .status-bar {
   display: flex;
   justify-content: space-between;
@@ -7,7 +9,7 @@
   padding: 0.5em 1em;
   margin-bottom: 1.5em;
 
-  /* Win95 raised look */
+  /* Win95 raised border */
   border-top: 2px solid #fff;
   border-left: 2px solid #fff;
   border-bottom: 2px solid #808080;
@@ -17,14 +19,13 @@
   font-size: 0.9em;
 }
 
-/* Player info */
+/* Player name */
 .players {
   font-weight: bold;
 }
 
 .player-name {
   color: #000080;
-  /* navy highlight for username */
   margin-left: 0.25em;
 }
 
@@ -40,8 +41,6 @@
   text-align: center;
   font-weight: bold;
   color: red;
-
-  /* make the input look Win95 style inset */
   border: 2px inset #fff;
   background-color: #fff;
 }
@@ -54,7 +53,80 @@
   color: #000;
 }
 
-/* Question text */
+/* ------------------------------- */
+/* Main Layout                     */
+/* ------------------------------- */
+
+/* This wraps everything under the status bar */
+.play-layout {
+  position: relative;              /* needed so activity-panel can be absolutely positioned */
+  display: flex;
+  justify-content: center;         /* center the game-content in the page */
+  margin-top: 1.5em;
+}
+
+/* The game content (question + answers) stays centered */
+.game-content {
+  max-width: 600px;
+  width: 100%;
+}
+
+/* ------------------------------- */
+/* Activity panel (small, left)    */
+/* ------------------------------- */
+
+.activity-panel {
+  position: absolute;
+  /* Place it to the left of the centered game. Adjust left value to taste. */
+  left: 10%;
+  top: 0;
+
+  width: 250px;
+  background-color: #C0C0C0;
+
+  /* Win95 raised panel */
+  border-top: 3px solid #fff;
+  border-left: 3px solid #fff;
+  border-bottom: 3px solid #808080;
+  border-right: 3px solid #808080;
+
+  box-shadow: 3px 3px 0px black;
+  padding: 0.5em;
+  font-size: 0.85em;
+
+  height: fit-content;
+}
+
+.activity-title {
+  font-weight: bold;
+  margin-bottom: 0.5em;
+  border-bottom: 1px solid #808080;
+}
+
+.activity-body {
+  max-height: 250px;
+  overflow-y: auto;
+  text-align: left;
+}
+
+.activity-event {
+  margin-bottom: 0.25em;
+}
+
+.activity-player {
+  font-weight: bold;
+  color: #000080;
+  margin-right: 0.25em;
+}
+
+.activity-empty {
+  font-style: italic;
+  color: #333;
+}
+
+/* ------------------------------- */
+/* Question box                    */
+/* ------------------------------- */
 .question-text {
   font-size: 1.2em;
   font-weight: bold;
@@ -62,16 +134,18 @@
   padding: 0.5em 1em;
   background-color: #C0C0C0;
 
-  /* raised panel look */
+  /* Win95 style bevel */
   border-top: 4px solid #fff;
   border-left: 4px solid #fff;
   border-bottom: 4px solid #808080;
   border-right: 4px solid #808080;
 
   box-shadow: 4px 4px 0px black;
-  display: inline-block;
 }
 
+/* ------------------------------- */
+/* Answers                        */
+/* ------------------------------- */
 .answers {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -82,20 +156,20 @@
   margin: 2em auto;
 }
 
-/* Answer buttons */
 .answers button {
   width: 100%;
   padding: 1em;
   font-size: 1em;
   font-weight: bold;
 
-  /* raised panel look */
+  /* Win95 raised panel */
   border-top: 4px solid #fff;
   border-left: 4px solid #fff;
   border-bottom: 4px solid #808080;
   border-right: 4px solid #808080;
 
   box-shadow: 4px 4px 0px black;
+  transition: background-color 0.3s ease;
 }
 
 .answers button:hover {
@@ -107,7 +181,9 @@
   border: 2px inset #fff;
 }
 
-/* Play Again button */
+/* ------------------------------- */
+/* Game Over & Play Again          */
+/* ------------------------------- */
 .play-again-container {
   text-align: center;
   margin-top: 1.5em;
@@ -120,7 +196,6 @@
   background-color: #c0c0c0;
   color: black;
 
-  /* same Win95 raised panel style */
   border-top: 4px solid #fff;
   border-left: 4px solid #fff;
   border-bottom: 4px solid #808080;
@@ -128,10 +203,8 @@
 
   box-shadow: 4px 4px 0px black;
   cursor: pointer;
-  transition: background-color 0.2s;
 }
 
-/* Hover & active effects same as answer buttons */
 .play-again-button:hover {
   background-color: #000080;
   color: white;
@@ -139,4 +212,25 @@
 
 .play-again-button:active {
   border: 2px inset #fff;
+}
+
+/* ------------------------------- */
+/* Mobile layout                   */
+/* ------------------------------- */
+@media (max-width: 800px) {
+  .play-layout {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .activity-panel {
+    position: static;          /* no absolute positioning on small screens */
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 1em;
+  }
+
+  .game-content {
+    max-width: 500px;
+  }
 }
